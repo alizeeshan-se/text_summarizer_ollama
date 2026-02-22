@@ -1,0 +1,120 @@
+text,Summarizer Text,timestamp
+"How to do it (The Process)
+Sign Up: Create an account on OpenRouter or Together AI.
+Get API Key: Go to your account settings/dashboard to generate a unique API Key.
+Install Library: In your VS Code terminal, install the necessary library:
+For OpenRouter (uses OpenAI format): pip install openai.
+For Together AI: pip install together.
+Set Base URL:
+OpenRouter: Set your code's base_url to https://openrouter.ai/api/v1.
+Together AI: Use their native SDK or set base_url to https://api.together.xyz.
+Choose Model:
+On OpenRouter, use the model ID deepseek/deepseek-r1:free.
+On Together AI, use deepseek-ai/DeepSeek-R1. 
+OpenRouter
+OpenRouter
+ +6
+Recommendation: Since you are just starting your project, start with OpenRouter because they have a completely free version of DeepSeek-R1 that doesn't require a credit card to test. 
+Do you want me to provide a simple Python script to connect your summarizer to the OpenRouter free API?
+
+
+
+
+undefined
+undefined
+undefined
+12 sites
+R1 0528 (free) - API, Providers, Stats - OpenRouter
+28-May-2025 — R1 0528 (free) - API, Providers, Stats. OpenRouter. DeepSeek: R1 0528 (free) deepseek/deepseek-r1-0528:free. ... May 28th update t...
+
+OpenRouter
+
+Pricing - OpenRouter
+Table_title: Pricing Table_content: header: | | Free | Pay-as-you-go | Enterprise | row: | : Platform Fees | Free: N/A | Pay-as-yo...
+
+OpenRouter
+
+Together-API-Basics/together-api-examples.ipynb at main
+Okay, so let's check it out. To use the API, you'll need to set up an account and billing. I believe they also give some credit at...
+
+GitHub
+Show all
+(venv) PS C:\Users\Zeeshan Ali\Desktop\Python_Projects_in_VsCode\Text_Summerizere/Text_Summerizer_using_Deepseek-r1/venv/Scripts/python.exe"" ""c:/Users/Zeeshan Ali/Desktop/Python_Projects_in_VsCode/Text_Summerizer_using_Deepseek-r1/text_summerizer.py""
+Traceback (most recent call last):
+  File ""c:\Users\Zeeshan Ali\Desktop\Python_Projects_in_VsCode\Text_Summerizer_using_Deepseek-r1\text_summerizer.py"", line 25, in <module>
+    interface = gr.interface(
+TypeError: 'module' object is not callable
+(venv) PS C:\Users\Zeeshan Ali\Desktop\Python_Projects_in_VsCode\Text_Summerizer_using_Deepseek-r1>
+
+what this error means?
+That error means you made a small case-sensitivity mistake. In Python, letters matter!
+In Gradio, the class name must start with a capital I. You likely wrote gr.interface, but it must be gr.Interface.
+The Fix
+Go to line 25 in your text_summerizer.py file and change the lowercase i to an uppercase I:
+Wrong:
+python
+interface = gr.interface(  # lowercase 'i' causes the error
+Use code with caution.
+
+Right:
+python
+interface = gr.Interface(  # uppercase 'I' is correct
+Use code with caution.
+
+Why this happened:
+In the Gradio library, gr refers to the whole module. gr.interface (lowercase) looks like you're trying to ""call"" the library itself like a function, which Python doesn't allow. gr.Interface (uppercase) tells Python to use the specific Interface tool inside that library. [1][3]
+Do you want me to check the input/output parameters of your gr.Interface to make sure the rest of the code will run smoothly?
+
+
+
+","'The error occurred because the `gr` module was imported incorrectly as a top-level function instead of using Flask's components directly. Let's go through a step-by-step guide to create the UI correctly.
+
+**Step 1: Import Gradio and Components**
+
+First, import the correct Gradio components:
+
+```python
+from gr import Interface
+```
+
+**Step 2: Create Your Text Data**
+
+Define your text data for summarization:
+
+```python
+text_data = [""The book is a great read. The author wrote an excellent synopsis.""]
+
+# Remove extra whitespace around the text boxes
+trimmed_text = [t.strip() for t in text_data]
+```
+
+**Step 3: Define Transfer Functions**
+
+Create transfer functions (functions that handle input and output):
+
+```python
+def get_summary(text):
+    """"""Summary of the given text.""""""
+    return ""The book is a great read. The author wrote an excellent synopsis. This summary provides a concise overview of the main points in the book.""
+
+def remove_whitespace(text):
+    """"""Remove extra whitespace from each line.""""""
+    return [t.strip() for t in text]
+```
+
+**Step 4: Create and Run the UI**
+
+Use `gr.Interface` to create your summary interface:
+
+```python
+interface = gr.Interface(
+    get_summary,
+    remove_whitespace,
+    name=""Summary Generator""
+)
+
+# Display the interface
+interface.show()
+```
+
+This will create a simple text summarization interface using Gradio. Let me know if you need further assistance!",2026-02-19 08:17:23.182207
